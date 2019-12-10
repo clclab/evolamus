@@ -1,0 +1,21 @@
+# baseurl: / # GitHub Pages
+# baseurl: 
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax # can't be changed
+  syntax_highlighter: rouge # can't be changed
+  parse_block_html: true
+
+sass:
+  style: :compressed 
+  sass_dir: assets/_scss
+
+exclude:
+  - README.md
+  - .gitignore
+  - _drafts
+  
+collections:
+  abstracts:
+    output: true

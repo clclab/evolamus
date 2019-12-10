@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <p class="brand text-primary"><em>Evolamus</em> student conference</p>
+            <p>A mini conference for the course <em>Evolution of Language and Music</em> at the University of Amsterdam</p>
+            <p class="text-muted">Edited by Bas Cornelissen.</p>
+
+        </div>
+        <div class="col-lg-9">
+            {% assign year = "2019" %}
+            {% assign sessions = "A,B,C,D" | split: "," %}
+            {% for session in sessions %}
+                <div class="session card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Session {{ session }}</h5>
+                        
+                        <table>
+                            {% assign abstracts = site.abstracts | where: "published", "true" | where: "edition", year | where: "session", session | sort: "number" %}
+                            {% for abstract in abstracts %}
+                                <tr>
+                                    <td>{{ session }}{{ abstract.number }}</td>
+                                    <td>{{ abstract.author }} </td>
+                                    <td><a href="{{ abstract.url }}">{{ abstract.title }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

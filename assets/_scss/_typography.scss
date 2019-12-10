@@ -1,0 +1,49 @@
+/**
+ * _typography.scss
+ */
+
+
+h1:not(.display-1),
+h2 {
+	margin-top: 2em;
+}
+
+h1:not(.display-1):first-child {
+	margin-top: 0;
+}
+
+.badge {
+	font-family: $font-family-monospace;
+}
+
+.navbar-brand,
+.brand {
+	font-family: $font-family-monospace !important;
+	em {
+		font-weight: bold;
+		font-style: normal;
+	}
+}
+
+.brand {
+	font-size: 2em;
+}
+
+h2 {
+	margin-top: 2em;
+}
+
+::selection { 
+	color: $gray-900;
+	background-color: $blue;
+}
+
+body {
+	counter-reset: sectioncounter;
+}
+
+.content h1:before {
+	content: counter(sectioncounter) " ";
+	counter-increment: sectioncounter;
+	opacity: .3;
+}
