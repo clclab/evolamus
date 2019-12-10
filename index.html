@@ -24,7 +24,7 @@ layout: default
                                 <tr>
                                     <td>{{ session }}{{ abstract.number }}</td>
                                     <td>{{ abstract.author }} </td>
-                                    <td><a href="{{ abstract.url }}">{{ abstract.title }}</a></td>
+                                    <td><a href="{{ abstract.url | prepend: site.baseurl}}">{{ abstract.title }}</a></td>
                                 </tr>
                             {% endfor %}
                         </table>
