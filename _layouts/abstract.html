@@ -14,49 +14,53 @@ layout: default
 <article class="blog">
   <div class="lab-header bg-light">
 		<div class="container">
-			<header class="offset-lg-3 py-5 lead my-5">
-        {% if page.session %}<p class="badge badge-primary">Presentation {{ page.session }}{{page.number}}</p>{% endif %}
+			<header class="py-5 lead my-5 col-lg-9">
+        {% if page.edition %}<p class="badge badge-primary">Evolamus {{ page.edition }}</p>{% endif %}
+        {% if page.session %}<p class="badge badge-secondary">{{ page.session }}{{page.number}}</p>{% endif %}
         {% if page.title %}<h1 class="display-1 text-primary">{{ page.title }}</h1>{% endif %}
         {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
-				<p class="author mt-5">
-          {{ page.author }} 
-        </p>
-        <div class="lead">
-            {{ page.excerpt }}
-        </div>
+				<p class="author mt-5 text-primary">{{ page.author }}</p>
+        
 			</header>
 		</div>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 sticky-top sidebar-left d-none d-lg-block d-xl-block pt-3">
-      </div>
       <div class="col-lg-9 content">
-        {{ content | remove: page.excerpt }}
+        {{ content }}
       </div>
     </div>
   </div>
 
   <footer class="bg-light">
     <div class="container">
-      <div class="offset-lg-3 py-5 mt-5 text-muted small">
-        {% if page.licence == 'cc' %}
-        <p>  
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
-          </a><br />
-          This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-        </p>
-        {% endif %}
-        <p>
-          <strong>Author contributions.</strong> {{ page.credits }}
-        </p>
-        <nav class="nav">
+      <div class="py-5 col-lg-9">
+        {% assign sessions = "A,B,C,D" | split: "," %}
+        {% assign abstracts = site.abstracts | where: "published", "true" | where: "edition", page.edition | where: "session", page.session | sort: "number" %}
+
+        {% for abstract in abstracts %}
+          {% assign next = page.number | plus: 1 %}
+          {% assign previous = page.number | minus: 1 %}
+            {% if abstract.number == previous %}
+            <a class="btn btn-primary" href="{{ abstract.url | prepend: site.baseurl}}">
+              &lt; {{abstract.session}}{{abstract.number}}. {{ abstract.author }}
+            </a>
+            {% endif %}
+          
+            {% if abstract.number == next %}
+            <a class="btn btn-primary float-right" href="{{ abstract.url | prepend: site.baseurl}}">
+              {{abstract.session}}{{abstract.number}}. {{ abstract.author }} &gt;
+            </a>          
+            {% endif %}
+        {% endfor %}
+      </div>
+      <!-- <div class="offset-lg-3 py-5 mt-5 text-muted small"> -->
+        <!-- <nav class="nav">
           <a class="nav-link pl-0" href="{{ site.url }}">View all clc<strong>labs</strong></a>
           <a class="nav-link" href="{{ site.github }}/tree/master/_labs/{{ page.slug }}" target="_blank">This lab on GitHub</a>
           <a class="nav-link" href="http://illc.uva.nl/clclab/">clclab</a>
-        </nav>
+        </nav> -->
       </div>
     </div>
   </footer>
