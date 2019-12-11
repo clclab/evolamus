@@ -18,16 +18,18 @@ layout: default
                     <div class="card-body">
                         <h5 class="card-title">Session {{ session }}</h5>
                         
-                        <table>
+                        <ol class="session-abstracts">
                             {% assign abstracts = site.abstracts | where: "published", "true" | where: "edition", year | where: "session", session | sort: "number" %}
                             {% for abstract in abstracts %}
-                                <tr>
-                                    <td>{{ session }}{{ abstract.number }}</td>
-                                    <td>{{ abstract.author }} </td>
-                                    <td><a href="{{ abstract.url | prepend: site.baseurl}}">{{ abstract.title }}</a></td>
-                                </tr>
+                                <li>
+                                    <strong>{{ session }}{{ abstract.number }}.</strong>
+                                    <a href="{{ abstract.url | prepend: site.baseurl}}">
+                                        {{ abstract.author }}. 
+                                        {{ abstract.title }}
+                                    </a>
+                                </li>
                             {% endfor %}
-                        </table>
+                        </ol>
                     </div>
                 </div>
             {% endfor %}
