@@ -1,5 +1,5 @@
 ---
-title: TBA
+title: No abstract
 author: Nicolas Hellebrand
 session: C
 number: 3

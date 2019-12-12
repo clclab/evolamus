@@ -1,5 +1,5 @@
 ---
-title: TBA
+title: No abstract
 author: Michael van Gompel
 session: D
 number: 2
